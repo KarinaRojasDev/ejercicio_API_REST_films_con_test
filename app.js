@@ -1,13 +1,14 @@
-const express = require('express');
-
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
-
 app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+const {getFilm,addFilm,updateFilm,deleteFilm} = require("./controllers/films.controller");
 
-// Necesario exportar app para que se puedan ejecutar los tests correctamente
+// Rutas
+app.get("/api/film/:title", getFilm);
+app.post("/api/film/", addFilm);
+app.put("/api/film/", updateFilm);
+app.delete("/api/film/", deleteFilm);
+
 module.exports = app;
